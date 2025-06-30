@@ -5,6 +5,11 @@ namespace PCMonitorConsoleApp;
 
 internal static class Program
 {
+
+    /// <summary>
+    /// dotnet publish -c Release -r win-x64 --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true
+    /// </summary>
+
     private static volatile bool s_keepRunning = true;
 
     private static string s_internalIP = string.Empty;
@@ -25,7 +30,7 @@ internal static class Program
 
     private static void Main(string[] args)
     {
-        var refreshDelayMs = 1000;
+        var refreshDelayMs = 3000;
         if (args.Length > 0 && int.TryParse(args[0], out var delaySec) && delaySec >= 1)
         {
             refreshDelayMs = delaySec * 1000;
@@ -34,7 +39,7 @@ internal static class Program
         else
         {
             Console.WriteLine(
-                "Using default refresh rate of 1 second. You can set a custom rate (in seconds) by running: .\\PCMonitorConsoleApp.exe 5");
+                "Using RefreshRate of: "+refreshDelayMs/1000+" seconds");
         }
 
         Console.Title = "System Monitor";
